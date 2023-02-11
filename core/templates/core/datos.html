@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<body>
+    {% extends 'core/base.html' %}
+    {% block title %}DATOS {% endblock %}
+    {% block content %}
+    <!--<form name="ab" action="" method="post">
+        <input type="hidden" id="hola" name="my_input" value="">
+    </form> -->
+    <div id="centro">
+        {% for auto1 in autos1 %}
+            {% if auto1.id == input_text %}
+                <div id="producto">
+                
+                    <img alt="{{auto1.modelo}}" src="{{auto1.imagen}}">
+                    <p>
+                        ID del auto: {{auto1.id}}
+                    </p>
+                    <p>
+                        Modelo del auto: {{auto1.modelo}}
+                    </p>
+                    <p>
+                        Renta del auto: {{auto1.precio}}
+                    </p>
+                </div>
+                {% if request.user.is_authenticated %}
+                <form method="POST" action="{% url 'home' %}" name="ventaaa" >
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="row">
+                        <input type="text" name="id_auto" value="{{auto1.id}}">
+                    </div>
+                    <div class="row">
+                        <input type="text" name="cliente" value="{{request.user.username}}">
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Ingresar" name="ventaaa">
+                    </div>
+                </form>
+                {% endif %}
+                
+            {% endif %}
+            
+                
+        {% endfor %}
+        
+    </div>
+    {% endblock %}
+    
+</body>
+</html>

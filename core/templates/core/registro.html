@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<body>
+    {% extends 'core/base.html' %}
+    {% block title %}REGISTRAR USUARIO {% endblock %}
+    {% block content %}
+    
+    <div id="centro" style="width: 30%; margin:0px auto;">
+        <strong>Registro de Usuarios</strong>
+        <form autocomplete="off" method="POST" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>
+                guardar
+            </button>
+
+        </form>
+        
+    </div>
+    {% endblock %}
+    
+</body>
+</html>

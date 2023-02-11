@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+    {% extends 'core/base.html' %}
+    {% block title %}MI CUENTA{% endblock %}
+    {% block content %}
+    <div id="centro" style="width: 30%; margin:0px auto;">
+    {% if object_list %}
+        {% for usuario in object_list %}
+            {% if user.is_authenticated %}
+                <p>
+                    Nickname de usuario: {{usuario.username}}
+                </p>
+                <p>
+                    Nombre de usuario: {{usuario.nombres}}
+                </p>
+                <p>
+                    Apellidos del usuario: {{usuario.apellidos}}
+                </p>
+                <p>
+                    Edad del usuario: {{usuario.edad}}
+                </p>
+                <p>
+                    Email del usuario: {{usuario.email}}
+                </p>
+                <button>borrar cuenta</button>
+                <button>actualizar información de la cuenta</button>
+            {% endif%}
+            
+        {% endfor %}
+    {% endif %}
+    </div>
+    
+
+    {% endblock %}
+    
+</body>
+</html>

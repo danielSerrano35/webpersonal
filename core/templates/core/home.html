@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+          
+<body>
+    {% extends 'core/base.html' %}
+    {% block title %}INICIO {% endblock %}
+    {% block content %}
+    
+    <div id="centro">
+        <br>
+        {% for auto in autos %}
+            <div id="producto">
+            
+                <img alt="{{auto.modelo}}" src="{{auto.imagen}}">
+                <p>
+                    ID del auto: {{auto.id}}
+                </p>
+                <p>
+                    Modelo del auto: {{auto.modelo}}
+                </p>
+                <p>
+                    Precio del auto: {{auto.precio}}
+                </p>
+                <center>
+                    <form class="form" action="{% url 'datos' %}" method="post">
+                        <input type="hidden" id="hola" name="my_input" value="{{auto.id}}">
+                        <button>MÁS INFORMACIÓN</button>
+                    </form>
+                </center>
+                
+            </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+    
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}| ALQUIRER DE AUTOS UTM</title>
+    <link rel="stylesheet" type="text/css" href="\static\core\estilos.css">
+</head>
+<body>
+    
+    <header id="main-header">
+	
+        <a id="logo-header" href="#">
+            <span class="site-name">UNIVERSIDAD TECNICA DE MANABI</span>
+            <span class="site-desc">DESARROLLO DE SISTEMAS DE INFORMACIÓN</span>
+        </a> <!-- / #logo-header -->
+    
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <select style="background-color: #333; color:white; border: #333;" name="links" id="" size="1" onchange="window.location.href=this.value;">
+                    {% if request.user.is_authenticated %}
+                        <option value="">{{user.username}}</option>
+                        <option value="{% url 'logout' %}">Cerrar sesión</option>
+                        <option value="{% url 'cuenta' %}">Mi cuenta</option>
+                    {% else %}
+                        <option value="">CUENTA</option>
+                        <option value="{% url 'registro' %}">Registrar Usuario</option>
+                    <option value="{% url 'login' %}">Login</option>
+                    {% endif %}
+                </select>
+            </ul>
+        </nav><!-- / nav -->
+    </header><!-- / #main-header -->
+    <section id="espacio"></section>
+    <div id="centro" style="width: 30%; margin:0px auto;">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <br>
+    </div>
+    
+    {% block content %}{% endblock %}
+    <footer id="main-footer">
+		<p>&copy; 2022  </p>
+        <button onclick="alertar('rserrano1164@utm.edu.ec');">
+            <a style="color:red">Mi contacto</a>
+        </button>
+        <script type="text/javascript">
+            function alertar(texto) {
+                alert(texto);
+            }
+        </script>
+	</footer> <!-- / #main-footer -->
+</body>
+</html>
