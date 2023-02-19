@@ -6,11 +6,14 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic.edit import FormView 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.views import generic
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import  AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from usuario.models import Usuario
-from .forms import FormularioUser, FormularioLogin
+from .forms import FormularioUser, FormularioLogin, EditUserProfileForm
 # Create your views here.
 
 class Login(FormView):
@@ -66,3 +69,23 @@ class RegistrarUsuario(CreateView):
         else:
             form.errors
             return render(request, self.template_name,{'form':form})
+class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
+    form_class = EditUserProfileForm
+    login_url = 'cuenta'
+    template_name = "core/actualizar_usuario.html"
+    success_url = reverse_lazy('home')
+    success_message = "Usuario Actualizado"
+
+    def get_object(slef):
+        return slef.request.user
+
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR,
+                             "Please submit the form carefully")
+        return redirect('home')
+class DeleteUser(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Usuario
+    login_url = 'cuenta'
+    template_name = 'core/eliminar_usuario.html'
+    success_message = "El Usuario a sido eliminado"
+    success_url = reverse_lazy('home')

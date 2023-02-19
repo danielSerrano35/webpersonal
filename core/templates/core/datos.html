@@ -26,18 +26,9 @@
                     </p>
                 </div>
                 {% if request.user.is_authenticated %}
-                <form method="POST" action="{% url 'home' %}" name="ventaaa" >
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="row">
-                        <input type="text" name="id_auto" value="{{auto1.id}}">
-                    </div>
-                    <div class="row">
-                        <input type="text" name="cliente" value="{{request.user.username}}">
-                    </div>
-                    <div class="row">
-                        <input type="submit" value="Ingresar" name="ventaaa">
-                    </div>
+                <form class="form" action="{% url 'compra' %}" method="post">
+                    <input type="hidden" id="hola" name="my_input1" value="{{auto1.modelo}}">
+                    <button>MÁS INFORMACIÓN</button>
                 </form>
                 {% endif %}
                 

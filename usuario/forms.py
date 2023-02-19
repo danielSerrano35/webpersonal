@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from usuario.models import Usuario
 
 class FormularioLogin(AuthenticationForm): 
@@ -71,3 +71,16 @@ class FormularioUser(forms.ModelForm):
         if commint:
             user.save()
         return user
+class EditUserProfileForm(UserChangeForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': "Ingrese su Email"}))
+    
+    nombres = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Ingrese sus nombres"}))
+
+    apellidos = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Ingrese sus apellidos"}))
+
+    edad = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Ingrese su edad"}))
+
+    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Ingrese su Usuario"}))
+    class Meta:
+        model = Usuario
+        fields = ['username', 'nombres', "apellidos", 'email', 'edad']

@@ -23,8 +23,12 @@
                 <p>
                     Email del usuario: {{usuario.email}}
                 </p>
-                <button>borrar cuenta</button>
-                <button>actualizar información de la cuenta</button>
+                <form action="{% url 'eliminar_usuario' usuario.id %}">
+                    <input type="submit" value="Eliminar Usuario {{user.username}}" />
+                </form>
+                <form action="{% url 'editar_usuario' %}">
+                    <input type="submit" value="actualizar información del Usuario" />
+                </form>
             {% endif%}
             
         {% endfor %}

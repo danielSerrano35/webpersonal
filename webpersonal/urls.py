@@ -18,6 +18,7 @@ from django.conf import settings
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from core import views
+from Inventario import views as vv
 from usuario import views as v
 
 app_name = "core"
@@ -25,10 +26,13 @@ app_name = "core"
 urlpatterns = [
     path('', views.home, name="home"),
     path('registro/',v.RegistrarUsuario.as_view(), name="registro"),
+    path('compra/', vv.agregarVenta, name='compra'),
     path('login/',v.Login.as_view(),name ='login'),
     path('logout/',v.logoutUsuario,name ='logout'),
     path('datos/', views.datos, name="datos"),
     path('about/', views.about, name="about"),
     path('cuenta/', v.listado.as_view(), name="cuenta"),
+    path('actualizar_usuario/', v.UpdateUserView.as_view(), name="editar_usuario"),
+    path('delete_user/<int:pk>/', v.DeleteUser.as_view(), name="eliminar_usuario"),
     path('admin/', admin.site.urls),
 ]

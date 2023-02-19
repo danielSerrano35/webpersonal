@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<body>
+    {% extends 'core/base.html' %}
+    {% block title %} ACTUALIZAR USUARIO {% endblock %}
+    {% block content %}
+    <div id="centro" style="width: 30%; margin:0px auto;">
+        <h2>Actualizando Usuario {{request.user.username}}</h2>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+                <form method="post">
+                    {% csrf_token %}
+                
+                    {{form.as_p}}
+                
+                    <br>
+                    <button class="btn btn-lg btn-success" type="submit">Update user</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

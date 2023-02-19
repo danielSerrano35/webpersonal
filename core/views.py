@@ -18,8 +18,8 @@ def datos(request):
 def registro(request):
     return render(request, "core/registro.html")
 
-"""def sesion(request):
-    return render(request, "core\sesion.html")"""
+def compra(request):
+    return render(request, "core/compra.html")
 
 def about(request):
     return render(request, "core/about.html")
